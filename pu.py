@@ -63,6 +63,7 @@ def streamKline():
                                 on_close=on_close)
 
     ws.run_forever()
+    
 def streamKline11():
     previous_numbers = []
     f=open("number.txt")
