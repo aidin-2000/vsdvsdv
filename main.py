@@ -49,6 +49,8 @@ def on_message(ws,message):
             if len(tempfac007)==150:
                 send_Telegram(str(tempfac007))
                 tempfac007.clear()
+            if len(tempfac007)>150:
+                tempfac007.clear()
 
 
 def send_Telegram(text: str):
