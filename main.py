@@ -43,8 +43,12 @@ def on_message(ws,message):
             rr = data1["rr"]
             if dt != rr["dt"]:
                 c = int(rr["c"])
+                v = int(rr["v"])
+
                 print("Выпало число = " + str(c))
                 send_Telegram(str(c))
+                send_Telegram(str(v))
+
                 dt = rr["dt"]
     if last["type"]=="factors":
         datafacfac=last['data']
@@ -55,7 +59,7 @@ def on_message(ws,message):
             result = find_range(c,facc)
             tempfac007.append(result)
             if len(tempfac007)==150:
-                send_Telegram(str(tempfac007))
+                #send_Telegram(str(tempfac007))
                 tempfac007.clear()
             if len(tempfac007)>150:
                 tempfac007.clear()
