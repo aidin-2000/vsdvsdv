@@ -43,9 +43,9 @@ def on_message(ws,message):
             rr = data1["rr"]
             if dt != rr["dt"]:
                 c = int(rr["c"])
-                v = int(rr["v"])
+                v = str(rr["v"])
 
-                print("Выпало число = " + str(c))
+                print("Выпало число = " + str(v))
                 send_Telegram(str(c))
                 send_Telegram(str(v))
 
@@ -83,7 +83,7 @@ def send_Telegram(text: str):
 def find_range(number, ranges):
     for rng in ranges:
         if  number<= rng['vt'] and number >= rng['vf']:
-            print(rng['vt'], number, rng['vf'],rng['c'])
+            #print(rng['vt'], number, rng['vf'],rng['c'])
             return rng['c']
     return None
 
