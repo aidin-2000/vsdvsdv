@@ -5,7 +5,7 @@ dt = "tempdate"
 dt1 = "tempdate"
 srez="dd"
 #european_sequence = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26]
-european_sequence=[0,26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23, 8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32]
+european_sequence=[26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23, 8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32,0]
 
 result=[]
 tempfac=[ 'rfer']
@@ -43,9 +43,9 @@ def on_message(ws,message):
             rr = data1["rr"]
             if dt != rr["dt"]:
                 c = int(rr["c"])
-                v = str(rr["v"])
+                v = rr["v"]
 
-                print("Выпало число = " + str(v))
+                #print("Выпало число = " + str(find_range(v,facc)))
                 send_Telegram(str(c))
                 send_Telegram(str(v))
 
@@ -56,10 +56,10 @@ def on_message(ws,message):
             tempfac[0]=datafacfac[len(datafacfac)-1]["dt"]
             c=datafacfac[len(datafacfac)-1]["v"]
        
-            result = find_range(c,facc)
-            tempfac007.append(result)
+            #result = find_range(c,facc)
+            tempfac007.append(c)
             if len(tempfac007)==150:
-                #send_Telegram(str(tempfac007))
+                send_Telegram(str(tempfac007))
                 tempfac007.clear()
             if len(tempfac007)>150:
                 tempfac007.clear()
@@ -83,7 +83,7 @@ def send_Telegram(text: str):
 def find_range(number, ranges):
     for rng in ranges:
         if  number<= rng['vt'] and number >= rng['vf']:
-            #print(rng['vt'], number, rng['vf'],rng['c'])
+            print(rng['vt'], number, rng['vf'],rng['c'])
             return rng['c']
     return None
 
